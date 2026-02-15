@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Hub</title>
+
+<style>
+body{
+  margin:0;
+  background:#050816;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
+  font-family:Arial;
+  color:white;
+}
+
+.container{
+  position:relative;
+  width:320px;
+  height:320px;
+}
+
+.center{
+  width:150px;
+  height:150px;
+  background:#1e6ee6;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  position:absolute;
+  top:85px;
+  left:85px;
+  cursor:pointer;
+  box-shadow:0 0 30px cyan;
+  z-index:10;
+}
+
+.ring{
+  width:110px;
+  height:110px;
+  border:2px solid cyan;
+  border-radius:50%;
+  position:absolute;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  cursor:pointer;
+  box-shadow:0 0 15px cyan;
+  background:#0a0f25;
+  transition:0.5s;
+  opacity:0;
+}
+
+.show{
+  opacity:1;
+}
+
+.footer{
+  position:absolute;
+  bottom:10px;
+  font-size:12px;
+  opacity:0.6;
+}
+
+@keyframes spin{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+
+.rotate{
+  animation:spin 10s linear infinite;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="center" onclick="openRings()">
+PROJECT HUB
+</div>
+
+<div id="r1" class="ring" onclick="openLink('https://photos.app.goo.gl/jZVYAQfoHrGASjsy6')">
+Dispatch
+</div>
+
+<div id="r2" class="ring" onclick="openLink('https://photos.app.goo.gl/UMq4zdDwt3egPzmm8')">
+Site Track
+</div>
+
+<div id="r3" class="ring" onclick="openLink('https://photos.app.goo.gl/RbYiTz49Wf6h7veh6')">
+Stock Fit
+</div>
+
+</div>
+
+<div class="footer">
+Created by Kartik Chauhan
+</div>
+
+<script>
+
+let opened=false;
+
+function openRings(){
+  if(opened) return;
+  opened=true;
+
+  const rings=[
+    document.getElementById("r1"),
+    document.getElementById("r2"),
+    document.getElementById("r3")
+  ];
+
+  const radius=120;
+  const centerX=160;
+  const centerY=160;
+
+  rings.forEach((ring,i)=>{
+    const angle=(2*Math.PI/3)*i;
+    const x=centerX + radius*Math.cos(angle) - 55;
+    const y=centerY + radius*Math.sin(angle) - 55;
+
+    ring.style.left=x+"px";
+    ring.style.top=y+"px";
+    ring.classList.add("show");
+    ring.classList.add("rotate");
+  });
+}
+
+function openLink(url){
+  window.open(url,'_blank');
+}
+
+</script>
+
+</body>
+</html>
